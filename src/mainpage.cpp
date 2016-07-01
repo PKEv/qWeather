@@ -1,11 +1,9 @@
 #include "mainpage.h"
-#include "ui_mainpage.h"
 
 #include <QPropertyAnimation>
 
 mainpage::mainpage(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::mainpage)
+    QWidget(parent)
 {
     resize(400,400);
     vBoxLayout = new QVBoxLayout;
@@ -29,5 +27,5 @@ mainpage::mainpage(QWidget *parent) :
 
 mainpage::~mainpage()
 {
-    delete ui;
+
 }

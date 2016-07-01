@@ -3,13 +3,11 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
-#include <dailywidget.h>
 #include <QPushButton>
+
+#include "dailywidget.h"
 #include "titlewidget.h"
 
-namespace Ui {
-class mainpage;
-}
 
 class mainpage : public QWidget
 {
@@ -25,7 +23,7 @@ public slots:
 
 
 private:
-    Ui::mainpage *ui;
+
     DailyWidget * dailyWidget;
     QVBoxLayout* vBoxLayout;
     QVBoxLayout* h1BoxLayout;
