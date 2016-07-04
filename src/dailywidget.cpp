@@ -1,7 +1,9 @@
 #include <QDate>
 #include "dailywidget.h"
 
-#define temp 1
+/**предварительное заполнение данными*/
+#define TEMP_DATA 1
+
 DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 {
     setGeometry(0,0,parent->width()/2,parent->height()/2);
@@ -10,7 +12,7 @@ DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
     sityLabel = new QLabel;
     dateLabel = new QLabel;
 
-#ifdef temp
+#ifdef TEMP_DATA
     sityLabel->setText("Санкт Петербург");
     dateLabel->setText(QDate::currentDate().toString("ddd MMMM d yy"));
 #endif
@@ -26,7 +28,7 @@ DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 
     setLayout(vBoxLayout);
 
-    show();
+    //show();
 
 }
 
@@ -51,7 +53,7 @@ void DailyWidget::setupH1Layout()
 
     tempFrameLayout->setSpacing(1);
 
-#ifdef temp
+#ifdef TEMP_DATA
     tempLabel->setText("27");
     tempDimLabel->setText("C");
     maxTempLabel->setText("27");
@@ -97,7 +99,6 @@ void DailyWidget::setupH1Layout()
 
     h1BoxLayout->addWidget(tempFrame);
     h1BoxLayout->addWidget(picLabel);
-
 }
 
 void DailyWidget::setupH2Layout()
@@ -152,7 +153,7 @@ void DailyWidget::setupH2Layout()
 
     setupSmallW(precipitationFrame, precipitationLayout, precipitationLabel, precipitationValueLabel, precipitationDimLabel, fin7LineLabel, fin8LineLabel );
 
-#ifdef temp
+#ifdef TEMP_DATA
     windLabel->setText("Ветер");
     windValueLabel->setText("мало");
     windDimLabel->setText("%%%");

@@ -9,9 +9,9 @@ TitleWIdget::TitleWIdget(QWidget *parent) :
     QWidget(parent)
 {
     setStyleSheet("background-color:transparent");
-    _horizonalSlider = new HorizonalSlider(this);
-    _horizonalSlider->setGeometry(0,0,this->width(),this->height());
-    _horizonalSlider->setShowNumber(2);
+    horizonalSlider = new HorizonalSlider(this);
+    horizonalSlider->setGeometry(0,0,this->width(),this->height());
+    horizonalSlider->setShowNumber(2);
 }
 
 void TitleWIdget::wheelEvent(QWheelEvent *ev)
@@ -19,44 +19,44 @@ void TitleWIdget::wheelEvent(QWheelEvent *ev)
     if(ev->delta() > 0)
     {
         prevTitle();
-        //emit prevTitleSignal();
+        emit prevTitleSignal();
     }
     else
     {
         nextTitle();
-        //emit nextTitleSignal();
+        emit nextTitleSignal();
     }
 }
 
 
 void TitleWIdget::nextTitle()
 {
-    if(_horizonalSlider->currentIndex() == _horizonalSlider->numberOfChildren() - 1)
+    if(horizonalSlider->currentIndex() == horizonalSlider->numberOfChildren() - 1)
         return;
-    _horizonalSlider->scrollToIndex(_horizonalSlider->currentIndex() + 1);
-    _horizonalSlider->currentWidget()->setStyleSheet(HIGHTLIGHT_STYLE);
-    _horizonalSlider->preWidget()->setStyleSheet(DARK_STYLE);
-    if(_horizonalSlider->nextWidget())
-        _horizonalSlider->nextWidget()->setStyleSheet(DARK_STYLE);
+    horizonalSlider->scrollToIndex(horizonalSlider->currentIndex() + 1);
+    horizonalSlider->currentWidget()->setStyleSheet(HIGHTLIGHT_STYLE);
+    horizonalSlider->preWidget()->setStyleSheet(DARK_STYLE);
+    if(horizonalSlider->nextWidget())
+        horizonalSlider->nextWidget()->setStyleSheet(DARK_STYLE);
 }
 
 void TitleWIdget::prevTitle()
 {
-    if(_horizonalSlider->currentIndex() == 0)
+    if(horizonalSlider->currentIndex() == 0)
         return;
-    _horizonalSlider->scrollToIndex(_horizonalSlider->currentIndex() - 1);
-    _horizonalSlider->currentWidget()->setStyleSheet(HIGHTLIGHT_STYLE);
-    _horizonalSlider->nextWidget()->setStyleSheet(DARK_STYLE);
-    if(_horizonalSlider->preWidget())
-        _horizonalSlider->preWidget()->setStyleSheet(DARK_STYLE);
+    horizonalSlider->scrollToIndex(horizonalSlider->currentIndex() - 1);
+    horizonalSlider->currentWidget()->setStyleSheet(HIGHTLIGHT_STYLE);
+    horizonalSlider->nextWidget()->setStyleSheet(DARK_STYLE);
+    if(horizonalSlider->preWidget())
+        horizonalSlider->preWidget()->setStyleSheet(DARK_STYLE);
 }
 
 void TitleWIdget::firstTitle()
 {
-    _horizonalSlider->scrollToIndex(0);
-    _horizonalSlider->currentWidget()->setStyleSheet(HIGHTLIGHT_STYLE);
-    _horizonalSlider->nextWidget()->setStyleSheet(DARK_STYLE);
-    //emit firstTitleSignal();
+    horizonalSlider->scrollToIndex(0);
+    horizonalSlider->currentWidget()->setStyleSheet(HIGHTLIGHT_STYLE);
+    horizonalSlider->nextWidget()->setStyleSheet(DARK_STYLE);
+    emit firstTitleSignal();
 }
 
 
@@ -66,22 +66,22 @@ void TitleWIdget::setTitles(const QStringList &titles)
     int currentIndex = 0;
     QList<QWidget* > labelList;
     foreach (QString title, _titles) {
-        QLabel *label = new QLabel(title,_horizonalSlider);
+        QLabel *label = new QLabel(title,horizonalSlider);
         label->setStyleSheet(DARK_STYLE);
-        label->resize(_horizonalSlider->width(),_horizonalSlider->height());
+        label->resize(horizonalSlider->width(),horizonalSlider->height());
         label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
         QFont font("Tahoma",20);
         label->setFont(font);
         labelList.append(label);
     }
-    _horizonalSlider->setChildren(labelList);
-    _horizonalSlider->scrollToIndex(currentIndex);
+    horizonalSlider->setChildren(labelList);
+    horizonalSlider->scrollToIndex(currentIndex);
 }
 
 void TitleWIdget::resizeEvent(QResizeEvent *re)
 {
 
-    _horizonalSlider->setGeometry(0,0,this->width(),this->height());
-    _horizonalSlider->currentWidget()->setStyleSheet(HIGHTLIGHT_STYLE);
+    horizonalSlider->setGeometry(0,0,this->width(),this->height());
+    horizonalSlider->currentWidget()->setStyleSheet(HIGHTLIGHT_STYLE);
     QWidget::resizeEvent(re);
 }

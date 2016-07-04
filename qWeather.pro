@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,12 +16,20 @@ SOURCES += src\main.cpp\
         src\mainpage.cpp \
     src\dailywidget.cpp \
     src\horizonalslider.cpp \
-    src\titlewidget.cpp
+    src\titlewidget.cpp \
+    src/contentwidget.cpp \
+    src/solitarywidget.cpp \
+    src/hourlywidget.cpp \
+    src/weatherrequest.cpp
 
 HEADERS  += src\mainpage.h \
     src\dailywidget.h \
     src\horizonalslider.h \
-    src\titlewidget.h
+    src\titlewidget.h \
+    src/contentwidget.h \
+    src/solitarywidget.h \
+    src/hourlywidget.h \
+    src/weatherrequest.h
 
 CONFIG   += c++11
 

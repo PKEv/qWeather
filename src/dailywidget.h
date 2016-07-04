@@ -24,7 +24,6 @@ public:
     QLabel *picLabel;
     QLabel *lineLabel;
 
-
     QLabel *fin1LineLabel;
     QLabel *fin2LineLabel;
 
@@ -67,10 +66,10 @@ public:
     QHBoxLayout * h1BoxLayout;
     QHBoxLayout * h2BoxLayout;
 
-
 signals:
 
 public slots:
+
 private:
     inline void setupH1Layout();
     inline void setupH2Layout();

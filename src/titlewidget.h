@@ -18,13 +18,20 @@ public:
     void prevTitle();
     void firstTitle();
 
+signals:
+    void nextTitleSignal();
+
+    void prevTitleSignal();
+
+    void firstTitleSignal();
+
 protected:
     void resizeEvent(QResizeEvent *re);
 
 private:
     QStringList _titles;
 
-    HorizonalSlider *_horizonalSlider;
+    HorizonalSlider *horizonalSlider;
 };
 
 #endif // TITLEWIDGET_H

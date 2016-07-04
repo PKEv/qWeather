@@ -7,6 +7,10 @@
 
 #include "dailywidget.h"
 #include "titlewidget.h"
+#include "contentwidget.h"
+#include "hourlywidget.h"
+
+#include "weatherrequest.h"
 
 
 class mainpage : public QWidget
@@ -17,7 +21,8 @@ public:
     explicit mainpage(QWidget *parent = 0);
     ~mainpage();
      TitleWIdget *titleWidget;
-
+     ContentWidget * contentWidget;
+     WeatherRequest *request;
 public slots:
 
 
@@ -25,9 +30,12 @@ public slots:
 private:
 
     DailyWidget * dailyWidget;
+    HourlyWidget * hourlyWidget;
     QVBoxLayout* vBoxLayout;
     QVBoxLayout* h1BoxLayout;
     QPushButton * button;
+
+    QList<QWidget* > widgetList;
 
 };
 
