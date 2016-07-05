@@ -6,7 +6,7 @@ mainpage::mainpage(QWidget *parent) :
     QWidget(parent)
 {
     resize(400,400);
-    vBoxLayout = new QVBoxLayout;
+    //vBoxLayout = new QVBoxLayout;
 
     titleWidget = new TitleWIdget(this);
     QStringList titles;
@@ -27,13 +27,18 @@ mainpage::mainpage(QWidget *parent) :
     connect(titleWidget, SIGNAL(firstTitleSignal()), contentWidget, SLOT(firstWidget()));
 
     //vBoxLayout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
-    vBoxLayout->addWidget(titleWidget);
-    vBoxLayout->addWidget(contentWidget);
+    titleWidget->setGeometry(0,0,this->width(),50);
+    contentWidget->setGeometry(0,titleWidget->y() + titleWidget->height(),
+                               this->width(),
+                               this->height()-titleWidget->height());
+    //vBoxLayout->addWidget(titleWidget);
+    //vBoxLayout->addWidget(contentWidget);
     //vBoxLayout->setAlignment(titleWidget,Qt::AlignTop);
     
-    setLayout(vBoxLayout);
+    //setLayout(vBoxLayout);
 
     request = new WeatherRequest();
+    request->GetCurrentWeather();
 
 }
 
