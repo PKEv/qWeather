@@ -3,6 +3,8 @@
 // example
 // http://api.openweathermap.org/data/2.5/forecast/daily?q=Moscow&&units=metric&APPID=4a61d170b251cc18c4c9417e7663d602
 
+QString WeatherRequest::cityName = "Moscow";
+
 WeatherRequest::WeatherRequest(QObject *parent) : QObject(parent)
 {
     manager = new QNetworkAccessManager(0);
@@ -114,4 +116,9 @@ void WeatherRequest::ParsingCurrentWeather(QString &data)
     currentWeather.weather.icon = weather.take("icon").toString();
     currentWeather.weather.id = weather.take("id").toVariant().toString();
     currentWeather.weather.main = weather.take("main").toVariant().toString();
+}
+
+void WeatherRequest::setCityName(const QString name)
+{
+    cityName = name;
 }

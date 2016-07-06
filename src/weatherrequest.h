@@ -87,11 +87,10 @@ public:
     void GetWeekWeather();
     void GetCurrentWeather();
 
-    QString cityName = "Moscow";
     QList <WeatherWeekStruct> weathers;
     WeatherCurrentStruct currentWeather;
 
-
+    void static setCityName(const QString name);
 signals:
 
 private slots:
@@ -102,6 +101,7 @@ public slots:
 private:
     QNetworkAccessManager *manager;
     StatusRequest status;
+    static QString cityName;
 
     void ParsingWeekWeather(QString &data);
     void ParsingCurrentWeather(QString &data);
