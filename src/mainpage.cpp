@@ -38,7 +38,7 @@ mainpage::mainpage(QWidget *parent) :
     //setLayout(vBoxLayout);
 
     request = new WeatherRequest();
-    request->GetCurrentWeather();
+    request->setCityName("Moscow");
 
 }
 

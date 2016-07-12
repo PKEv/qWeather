@@ -92,6 +92,7 @@ public:
 
     void static setCityName(const QString name);
 signals:
+    void DataReady();
 
 private slots:
     void onReply(QNetworkReply *reply);

@@ -30,6 +30,13 @@ DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 
     //show();
 
+
+    request = new WeatherRequest();
+    request->GetCurrentWeather();
+    //request->setCityName("Moscow");
+    connect( request, SIGNAL(DataReady()), this, SLOT(UpdateData()) );
+
+
 }
 
 void DailyWidget::setupH1Layout()
@@ -140,7 +147,7 @@ void DailyWidget::setupH2Layout()
     fin6LineLabel = new QLabel;
 
     setupSmallW(presFrame, presLayout, presLabel, presValueLabel, presDimLabel, fin5LineLabel, fin6LineLabel );
-
+/*
     precipitationFrame = new QFrame;
     precipitationLayout = new QVBoxLayout(precipitationFrame);
 
@@ -152,7 +159,7 @@ void DailyWidget::setupH2Layout()
     fin8LineLabel = new QLabel;
 
     setupSmallW(precipitationFrame, precipitationLayout, precipitationLabel, precipitationValueLabel, precipitationDimLabel, fin7LineLabel, fin8LineLabel );
-
+*/
 #ifdef TEMP_DATA
     windLabel->setText("Ветер");
     windValueLabel->setText("мало");
@@ -165,16 +172,16 @@ void DailyWidget::setupH2Layout()
     presLabel->setText("Давл");
     presValueLabel->setText("мало");
     presDimLabel->setText("%%%");
-
+/*
     precipitationLabel->setText("Осад");
     precipitationValueLabel->setText("мало");
-    precipitationDimLabel->setText("%%%");
+    precipitationDimLabel->setText("%%%");*/
 #endif
 
     h2BoxLayout->addWidget(humidityFrame);
     h2BoxLayout->addWidget(windFrame);
     h2BoxLayout->addWidget(presFrame);
-    h2BoxLayout->addWidget(precipitationFrame);
+   // h2BoxLayout->addWidget(precipitationFrame);
 }
 
 void DailyWidget::setupSmallW(QFrame * parentw,QVBoxLayout * layout, QLabel* laybel, QLabel* value, QLabel* dim, QLabel* line1, QLabel *line2 )
@@ -219,4 +226,30 @@ void DailyWidget::setupSmallW(QFrame * parentw,QVBoxLayout * layout, QLabel* lay
                            "border-width:1px;"
                            "border-color:rgba(255, 255, 255, 180);"
                            "color:white");
+}
+
+void DailyWidget::UpdateData()
+{
+
+    tempLabel->setText(QString::number(int(request->currentWeather.qMain.temp)));
+    tempDimLabel->setText("C");
+    maxTempLabel->setText(QString::number(request->currentWeather.qMain.temp_max));
+    minTempLabel->setText(QString::number(request->currentWeather.qMain.temp_min));
+
+    windLabel->setText(request->currentWeather.weather.des);
+    windValueLabel->setText(QString::number(request->currentWeather.wind.speed));
+    windDimLabel->setText("%%%");
+
+
+
+    humidityLabel->setText("Влажность");
+    humidityValueLabel->setText(QString::number(request->currentWeather.qMain.humidity));
+    humidityDimLabel->setText("%%%");
+
+
+    presLabel->setText("Давл");
+    presValueLabel->setText(QString::number(request->currentWeather.qMain.pressure));
+    presDimLabel->setText("%%%");
+
+
 }

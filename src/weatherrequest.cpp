@@ -90,6 +90,7 @@ void WeatherRequest::ParsingWeekWeather(QString &data)
         weatherStr.weather.main = weather.take("main").toVariant().toString();
         weathers.push_back(weatherStr);
     }
+    emit DataReady();
 }
 
 void WeatherRequest::ParsingCurrentWeather(QString &data)
@@ -99,11 +100,11 @@ void WeatherRequest::ParsingCurrentWeather(QString &data)
 
     currentWeather.main.clouds = jsonObject["clouds"].toObject().take("all").toVariant().toFloat();
     currentWeather.dt = jsonObject["dt"].toVariant().toFloat();
-    currentWeather.main.temp = jsonObject["main"].toObject().take("temp").toVariant().toFloat();
+    currentWeather.main.temp = jsonObject["main"].toObject().take("temp").toVariant().toFloat()-273;
     currentWeather.main.pressure = jsonObject["main"].toObject().take("pressure").toVariant().toFloat();
     currentWeather.main.humidity = jsonObject["main"].toObject().take("humidity").toVariant().toFloat();
-    currentWeather.main.temp_min = jsonObject["main"].toObject().take("temp_min").toVariant().toFloat();
-    currentWeather.main.temp_max = jsonObject["main"].toObject().take("temp_max").toVariant().toFloat();
+    currentWeather.main.temp_min = jsonObject["main"].toObject().take("temp_min").toVariant().toFloat()-273;
+    currentWeather.main.temp_max = jsonObject["main"].toObject().take("temp_max").toVariant().toFloat()-273;
 
     currentWeather.sys.sunrise = jsonObject["sys"].toObject().take("sunrise").toInt();
     currentWeather.sys.sunset = jsonObject["sys"].toObject().take("sunset").toInt();
@@ -116,6 +117,8 @@ void WeatherRequest::ParsingCurrentWeather(QString &data)
     currentWeather.weather.icon = weather.take("icon").toString();
     currentWeather.weather.id = weather.take("id").toVariant().toString();
     currentWeather.weather.main = weather.take("main").toVariant().toString();
+
+    emit DataReady();
 }
 
 void WeatherRequest::setCityName(const QString name)
