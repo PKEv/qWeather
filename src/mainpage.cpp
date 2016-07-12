@@ -18,8 +18,9 @@ mainpage::mainpage(QWidget *parent) :
     contentWidget = new ContentWidget(this);
     dailyWidget = new DailyWidget(this);
     hourlyWidget = new HourlyWidget(this);
+    settingsWether = new SettingsWether(this);
 
-    widgetList << dailyWidget << hourlyWidget;
+    widgetList << dailyWidget << hourlyWidget << settingsWether;
     contentWidget->setWidget(widgetList);
 
     connect(titleWidget, SIGNAL(prevTitleSignal()), contentWidget, SLOT(prevWidget()));
@@ -28,9 +29,10 @@ mainpage::mainpage(QWidget *parent) :
 
     //vBoxLayout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     titleWidget->setGeometry(0,0,this->width(),50);
-    contentWidget->setGeometry(0,titleWidget->y() + titleWidget->height(),
+    contentWidget->setGeometry(0,
+                               titleWidget->y() + titleWidget->height(),
                                this->width(),
-                               this->height()-titleWidget->height());
+                               this->height() - titleWidget->height());
     //vBoxLayout->addWidget(titleWidget);
     //vBoxLayout->addWidget(contentWidget);
     //vBoxLayout->setAlignment(titleWidget,Qt::AlignTop);

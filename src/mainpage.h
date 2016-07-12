@@ -9,6 +9,7 @@
 #include "titlewidget.h"
 #include "contentwidget.h"
 #include "hourlywidget.h"
+#include "settingswether.h"
 
 #include "weatherrequest.h"
 
@@ -31,6 +32,7 @@ private:
 
     DailyWidget * dailyWidget;
     HourlyWidget * hourlyWidget;
+    SettingsWether * settingsWether;
     QVBoxLayout* vBoxLayout;
     QVBoxLayout* h1BoxLayout;
     QPushButton * button;

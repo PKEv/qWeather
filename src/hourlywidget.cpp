@@ -10,7 +10,8 @@ HourlyWidget::HourlyWidget(QWidget *parent) : QWidget(parent)
 
     vLayout->addWidget(sololit);
     scrollArea->setLayout(vLayout);
-
+    setGeometry(0,0,parent->width()/2,parent->height()/2);
+resize(400,400);
 
 }
 
