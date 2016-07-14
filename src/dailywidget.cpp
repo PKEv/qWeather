@@ -2,15 +2,14 @@
 #include "dailywidget.h"
 
 /**предварительное заполнение данными*/
-#define TEMP_DATA 1
+//#define TEMP_DATA 1
 
 DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 {
-    setGeometry(0,0,parent->width()/2,parent->height()/2);
-    //setStyleSheet("background-color:rgba(255,255,255,0);border:none");
-    vBoxLayout = new QVBoxLayout;
-    sityLabel = new QLabel;
-    dateLabel = new QLabel;
+    setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    vBoxLayout = new QVBoxLayout(this);
+    sityLabel = new QLabel(this);
+    dateLabel = new QLabel(this);
 
 #ifdef TEMP_DATA
     sityLabel->setText("Санкт Петербург");
@@ -28,9 +27,6 @@ DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 
     setLayout(vBoxLayout);
 
-    //show();
-
-
     request = new WeatherRequest();
     request->GetCurrentWeather();
     //request->setCityName("Moscow");
@@ -41,8 +37,8 @@ DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 
 void DailyWidget::setupH1Layout()
 {
-    h1BoxLayout = new QHBoxLayout;
-    tempFrame = new QFrame;
+    h1BoxLayout = new QHBoxLayout(this);
+    tempFrame = new QFrame(this);
     tempFrameLayout = new QGridLayout(tempFrame);
 
     tempLabel = new QLabel(tempFrame);

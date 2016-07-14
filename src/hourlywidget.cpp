@@ -2,7 +2,8 @@
 
 HourlyWidget::HourlyWidget(QWidget *parent) : QWidget(parent)
 {
-    vLayout = new QVBoxLayout;
+    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    vLayout = new QVBoxLayout(this);
     scrollArea = new QScrollArea(this);
     solitaryWidgetList.clear();
     SolitaryWidget *sololit = new SolitaryWidget();
@@ -10,8 +11,5 @@ HourlyWidget::HourlyWidget(QWidget *parent) : QWidget(parent)
 
     vLayout->addWidget(sololit);
     scrollArea->setLayout(vLayout);
-    setGeometry(0,0,parent->width()/2,parent->height()/2);
-resize(400,400);
-
 }
 

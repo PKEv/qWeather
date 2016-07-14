@@ -2,13 +2,12 @@
 
 SettingsWether::SettingsWether(QWidget *parent) : QWidget(parent)
 {
-    setGeometry(0,0,parent->width()/2,parent->height()/2);
-resize(400,400);
+    setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    vLayout = new QVBoxLayout(this);
     locationEdit = new LocationEdit;
     dimBox = new QComboBox;
     locationLabel = new QLabel;
     dimLabel = new QLabel;
-    vLayout = new QVBoxLayout;
 
     locationLabel->setText(tr("Название города:"));
     dimLabel->setText(tr("Размерность показателей:"));
@@ -22,10 +21,8 @@ resize(400,400);
     vLayout->addWidget(locationEdit);
     vLayout->addWidget(dimLabel);
     vLayout->addWidget(dimBox);
-    vLayout->setGeometry(QRect(0,0,this->width(), this->height()));
 
     setLayout(vLayout);
-
 
 }
 

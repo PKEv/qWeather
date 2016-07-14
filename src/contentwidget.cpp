@@ -3,6 +3,7 @@
 ContentWidget::ContentWidget(QWidget *parent) :
     QWidget(parent)
 {
+    setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     horizonalSlider = new HorizonalSlider(this);
     horizonalSlider->setShowNumber(1);
     horizonalSlider->setGeometry(0,0,this->width(),this->height());

@@ -1,4 +1,6 @@
 #include "horizonalslider.h"
+#include "QDebug"
+#include <QString>
 
 HorizonalSlider::HorizonalSlider(QWidget *parent) :
     QWidget(parent),
@@ -46,9 +48,11 @@ void HorizonalSlider::setChildren(const QList<QWidget *> &widgetList)
     clear();
     _items = widgetList;
     int stepWidth = this->width() / _showCount;
-    foreach (QWidget* item, _items) {
+    foreach (QWidget* item, _items)
+    {
         item->setParent(_container);
         _hBox->addWidget(item);
+        qDebug() << QString("item x= ") << QString::number(item->geometry().x());
         _childrenSize++;
     }
     _container->setGeometry(0,0,stepWidth * _childrenSize,this->height());
@@ -94,6 +98,13 @@ void HorizonalSlider::scrollToIndex(int index)
             endWidth += _widths[i];
         endWidth += _widths[index - 1] / _showCount;
     }
+
+    qDebug() << QString("endWidth = ") << QString::number(endWidth);
+    qDebug() << QString("_container Y = ") << QString::number(_container->geometry().y());
+    qDebug() << QString("_container x = ") << QString::number(_container->geometry().x());
+    qDebug() << QString("_hBox Y = ") << QString::number(_hBox->geometry().y());
+
+    qDebug() << QString("_container W = ") << QString::number(_container->geometry().width());
 
     QRect endVal(-endWidth,_container->geometry().y(),_container->geometry().width(),_container->geometry().height());
     anim->setEndValue(endVal);

@@ -26,6 +26,7 @@ public:
      WeatherRequest *request;
 public slots:
 
+    void Button();
 
 
 private:
