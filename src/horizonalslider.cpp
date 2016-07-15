@@ -10,6 +10,8 @@ HorizonalSlider::HorizonalSlider(QWidget *parent) :
 {
     _container = new QWidget(this);
     _container->setGeometry(0,0,this->width(),this->height());
+    _container->setContentsMargins(0,0,0,0);
+
 
     _currentIndex = 0;
 }
@@ -146,11 +148,16 @@ QWidget* HorizonalSlider::nextWidget() const
 void HorizonalSlider::resizeEvent(QResizeEvent *re)
 {
     QWidget::resizeEvent(re);
-    _container->resize(this->width() / _showCount * _childrenSize,this->height());
+    //_container->resize(this->width() / _showCount * _childrenSize,this->height());
+    _container->setGeometry(0,0,this->width() / _showCount * _childrenSize,this->height());
+    qDebug() << QString("_childrenSize = ") << QString::number(_childrenSize);
+    qDebug() << QString("_container w= ") << QString::number(this->width() / _showCount * _childrenSize);
     _widths.clear();
     foreach(QWidget *item,_items)
     {
         item->resize(_container->width() / _childrenSize,_container->height());
+        qDebug() << QString("item w= ")
+                 << item->geometry();
         _widths.append(item->width());
     }
     scrollToIndex(_currentIndex);
