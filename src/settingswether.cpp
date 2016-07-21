@@ -2,8 +2,8 @@
 
 SettingsWether::SettingsWether(QWidget *parent) : QWidget(parent)
 {
-    setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
-    vLayout = new QVBoxLayout(this);
+    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    vLayout = new QVBoxLayout();
     locationEdit = new LocationEdit;
     dimBox = new QComboBox;
     locationLabel = new QLabel;

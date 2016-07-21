@@ -6,7 +6,7 @@
 
 DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 {
-    setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
     vBoxLayout = new QVBoxLayout(this);
     sityLabel = new QLabel(this);
     dateLabel = new QLabel(this);

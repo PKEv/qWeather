@@ -6,7 +6,7 @@ mainpage::mainpage(QWidget *parent) :
     QWidget(parent)
 {
     resize(400, 400);
-    setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
     //vBoxLayout = new QVBoxLayout(this);
 
 
@@ -18,11 +18,15 @@ mainpage::mainpage(QWidget *parent) :
     //titleWidget->setGeometry(0,0,this->width(),200);
     //titleWidget->res
 
+
     contentWidget = new ContentWidget(this);
+
     dailyWidget = new DailyWidget(this);
-    hourlyWidget = new HourlyWidget(this);
+    /*
+    hourlyWidget = new HourlyWidget(this);*/
     settingsWether = new SettingsWether(this);
-    SettingsWether *settings2Wether = new SettingsWether(this);
+
+    //SettingsWether *settings2Wether = new SettingsWether(this);
 
     QRect size = QRect(0,
                        titleWidget->y() + titleWidget->height(),
@@ -30,14 +34,16 @@ mainpage::mainpage(QWidget *parent) :
                        this->height() - titleWidget->y() - titleWidget->height());
 
     contentWidget->setGeometry(size);
+
     dailyWidget->setGeometry(size);
-    hourlyWidget->setGeometry(size);
-    settingsWether->setGeometry(size);
-    settings2Wether->setGeometry(size);
+    /*
+    hourlyWidget->setGeometry(size);*/
+    settingsWether->setGeometry(size);/*
+    settings2Wether->setGeometry(size);*/
 
     //contentWidget->setContentsMargins(0,0,0,0);
 
-    widgetList << settingsWether << hourlyWidget << dailyWidget << settings2Wether;
+    widgetList  << dailyWidget /*<< hourlyWidget*/ << settingsWether /*<< settings2Wether*/;
     contentWidget->setWidget(widgetList);
 
     connect(titleWidget, SIGNAL(prevTitleSignal()), contentWidget, SLOT(prevWidget()));

@@ -38,6 +38,7 @@ private:
     QVBoxLayout* h1BoxLayout;
     QPushButton * button;
 
+
     QList<QWidget* > widgetList;
 
 };

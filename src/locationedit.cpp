@@ -7,8 +7,8 @@
 LocationEdit::LocationEdit(QWidget *parent) :
     QLineEdit(parent)
 {
-    QFont font("Ubuntu",20);
-    setFont(font);
+    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    setMaximumHeight(25);
     _completer = new QCompleter(this);
     _completer->setMaxVisibleItems(15);
     _completer->setModel(modelFromFile(":/cityList.txt"));

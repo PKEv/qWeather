@@ -12,15 +12,17 @@ class SettingsWether : public QWidget
     Q_OBJECT
 public:
     explicit SettingsWether(QWidget *parent = 0);
+
+
+signals:
+
+public slots:
+private:
     LocationEdit *locationEdit;
     QComboBox * dimBox;
     QLabel * locationLabel;
     QLabel * dimLabel;
     QVBoxLayout * vLayout;
-
-signals:
-
-public slots:
 };
 
 #endif // SETTINGSWETHER_H
