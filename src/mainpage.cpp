@@ -10,7 +10,7 @@ mainpage::mainpage(QWidget *parent) :
 
     titleWidget = new TitleWIdget(this);
     QStringList titles;
-    titles << tr("Текущее значение") << "Подробный прогноз" << "Прогноз по дням" << "Настройки" ;
+    titles << tr("Текущее значение") << tr("Подробный прогноз") << tr("Прогноз по дням") << tr("Настройки") ;
     titleWidget->setGeometry(0, 0, this->width(), 50);
     titleWidget->setTitles(titles);
 
