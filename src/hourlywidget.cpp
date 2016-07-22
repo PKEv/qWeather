@@ -2,7 +2,7 @@
 
 HourlyWidget::HourlyWidget(QWidget *parent) : QWidget(parent)
 {
-    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     vLayout = new QVBoxLayout(this);
     scrollArea = new QScrollArea(this);
     solitaryWidgetList.clear();

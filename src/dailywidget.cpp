@@ -227,6 +227,9 @@ void DailyWidget::setupSmallW(QFrame * parentw,QVBoxLayout * layout, QLabel* lay
 void DailyWidget::UpdateData()
 {
 
+    sityLabel->setText(request->getCityName());
+    dateLabel->setText(request->time.toString("hh:mm:ss dd.MM.yyyy"));
+
     tempLabel->setText(QString::number(int(request->currentWeather.qMain.temp)));
     tempDimLabel->setText("C");
     maxTempLabel->setText(QString::number(request->currentWeather.qMain.temp_max));
@@ -236,16 +239,11 @@ void DailyWidget::UpdateData()
     windValueLabel->setText(QString::number(request->currentWeather.wind.speed));
     windDimLabel->setText("%%%");
 
-
-
     humidityLabel->setText("Влажность");
     humidityValueLabel->setText(QString::number(request->currentWeather.qMain.humidity));
     humidityDimLabel->setText("%%%");
 
-
     presLabel->setText("Давл");
     presValueLabel->setText(QString::number(request->currentWeather.qMain.pressure));
     presDimLabel->setText("%%%");
-
-
 }

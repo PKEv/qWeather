@@ -89,8 +89,14 @@ public:
 
     QList <WeatherWeekStruct> weathers;
     WeatherCurrentStruct currentWeather;
+    QDateTime time;
 
     void static setCityName(const QString name);
+    QString static getCityName()
+    {
+        return cityName;
+    }
+
 signals:
     void DataReady();
 

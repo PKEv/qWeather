@@ -46,6 +46,7 @@ void WeatherRequest::onReply(QNetworkReply *reply)
         reply->deleteLater();
         return;
     }
+    time = QDateTime::currentDateTime();
     QTextCodec *codec = QTextCodec::codecForName("utf-8");
     QString all = codec->toUnicode( reply->readAll() );
     if (status == StatusRequest::WeekRequest)
