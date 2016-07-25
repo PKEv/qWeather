@@ -5,7 +5,9 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QPushButton>
 #include "locationedit.h"
+#include "settings.h"
 
 class SettingsWether : public QWidget
 {
@@ -17,12 +19,14 @@ public:
 signals:
 
 public slots:
+    void Setup();
 private:
     LocationEdit *locationEdit;
     QComboBox * dimBox;
     QLabel * locationLabel;
     QLabel * dimLabel;
     QVBoxLayout * vLayout;
+    QPushButton * setupButton;
 };
 
 #endif // SETTINGSWETHER_H

@@ -12,6 +12,7 @@
 #include "settingswether.h"
 
 #include "weatherrequest.h"
+#include "settings.h"
 
 
 class mainpage : public QWidget

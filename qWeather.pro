@@ -22,7 +22,8 @@ SOURCES += src\main.cpp\
     src/hourlywidget.cpp \
     src/weatherrequest.cpp \
     src/locationedit.cpp \
-    src/settingswether.cpp
+    src/settingswether.cpp \
+    src/settings.cpp
 
 HEADERS  += src\mainpage.h \
     src\dailywidget.h \
@@ -33,7 +34,8 @@ HEADERS  += src\mainpage.h \
     src/hourlywidget.h \
     src/weatherrequest.h \
     src/locationedit.h \
-    src/settingswether.h
+    src/settingswether.h \
+    src/settings.h
 
 CONFIG   += c++11
 

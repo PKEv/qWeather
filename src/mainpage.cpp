@@ -39,17 +39,18 @@ mainpage::mainpage(QWidget *parent) :
     connect(titleWidget, SIGNAL(nextTitleSignal()), contentWidget, SLOT(nextWidget()));
     connect(titleWidget, SIGNAL(firstTitleSignal()), contentWidget, SLOT(firstWidget()));
 
+    Settings::getInstance().ReadSettings();
+
     request = new WeatherRequest();
-    request->setCityName("Saint Petersburg,RU");
+    request->setCityName(Settings::getInstance().cityName);
 
 }
 void mainpage::Button()
 {
-
     setWindowTitle(QString:: number(dailyWidget->x())+"+"+QString:: number(dailyWidget->y()));
 }
 
 mainpage::~mainpage()
 {
-
+    Settings::getInstance().SaveSettings();
 }
