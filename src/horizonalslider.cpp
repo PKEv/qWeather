@@ -54,7 +54,7 @@ void HorizonalSlider::setChildren(const QList<QWidget *> &widgetList)
     {
         item->setParent(_container);
         _hBox->addWidget(item);
-        qDebug() << QString("item x= ") << QString::number(item->geometry().x());
+        //qDebug() << QString("item x= ") << QString::number(item->geometry().x());
         _childrenSize++;
     }
     _container->setGeometry(0,0,stepWidth * _childrenSize,this->height());
@@ -100,13 +100,13 @@ void HorizonalSlider::scrollToIndex(int index)
             endWidth += _widths[i];
         endWidth += _widths[index - 1] / _showCount;
     }
-
+/*
     qDebug() << QString("endWidth = ") << QString::number(endWidth);
     qDebug() << QString("_container Y = ") << QString::number(_container->geometry().y());
     qDebug() << QString("_container x = ") << QString::number(_container->geometry().x());
     qDebug() << QString("_hBox Y = ") << QString::number(_hBox->geometry().y());
 
-    qDebug() << QString("_container W = ") << QString::number(_container->geometry().width());
+    qDebug() << QString("_container W = ") << QString::number(_container->geometry().width());*/
 
     QRect endVal(-endWidth,_container->geometry().y(),_container->geometry().width(),_container->geometry().height());
     anim->setEndValue(endVal);
@@ -150,14 +150,17 @@ void HorizonalSlider::resizeEvent(QResizeEvent *re)
     QWidget::resizeEvent(re);
     //_container->resize(this->width() / _showCount * _childrenSize,this->height());
     _container->setGeometry(0,0,this->width() / _showCount * _childrenSize,this->height());
+    /*
     qDebug() << QString("_childrenSize = ") << QString::number(_childrenSize);
     qDebug() << QString("_container w= ") << QString::number(this->width() / _showCount * _childrenSize);
+    */
     _widths.clear();
     foreach(QWidget *item,_items)
     {
         item->resize(_container->width() / _childrenSize,_container->height());
+        /*
         qDebug() << QString("item w= ")
-                 << item->geometry();
+                 << item->geometry();*/
         _widths.append(item->width());
     }
     scrollToIndex(_currentIndex);

@@ -27,10 +27,10 @@ DailyWidget::DailyWidget(QWidget *parent) : QWidget(parent)
 
     setLayout(vBoxLayout);
 
-    request = new WeatherRequest();
-    request->GetCurrentWeather();
+    //request = new WeatherRequest();
+    //request->GetCurrentWeather();
     //request->setCityName("Moscow");
-    connect( request, SIGNAL(DataReady()), this, SLOT(UpdateData()) );
+    //connect( request, SIGNAL(DataReady()), this, SLOT(UpdateData()) );
 
 
 }
@@ -227,6 +227,7 @@ void DailyWidget::setupSmallW(QFrame * parentw,QVBoxLayout * layout, QLabel* lay
 void DailyWidget::UpdateData()
 {
 
+    WeatherRequest * request = &WeatherRequest::getInstance();
     sityLabel->setText(request->getCityName());
     dateLabel->setText(request->time.toString("hh:mm:ss dd.MM.yyyy"));
 

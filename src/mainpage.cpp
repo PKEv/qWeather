@@ -41,8 +41,11 @@ mainpage::mainpage(QWidget *parent) :
 
     Settings::getInstance().ReadSettings();
 
-    request = new WeatherRequest();
-    request->setCityName(Settings::getInstance().cityName);
+    //request = new WeatherRequest();
+    WeatherRequest::getInstance().setCityName(Settings::getInstance().cityName);
+    WeatherRequest::getInstance().GetCurrentWeather();
+    connect( &(WeatherRequest::getInstance()), SIGNAL(DataReadyCurrent()), dailyWidget, SLOT(UpdateData()) );
+    connect( &(WeatherRequest::getInstance()), SIGNAL(DataReadyCurrent()), &(WeatherRequest::getInstance()), SLOT(GetWeekWeather()) );
 
 }
 void mainpage::Button()

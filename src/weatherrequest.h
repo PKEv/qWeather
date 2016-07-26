@@ -53,7 +53,7 @@ struct WeatherWeekStruct
 {
     float clouds;
     float deg;
-    float dt;
+    QDateTime dt;
     float humid;
     float pressure;
     float speed;
@@ -82,9 +82,10 @@ class WeatherRequest : public QObject
 {
     Q_OBJECT
 public:
-    explicit WeatherRequest(QObject *parent = 0);
+    static WeatherRequest& getInstance();
+    static void destroyInstance();
 
-    void GetWeekWeather();
+
     void GetCurrentWeather();
 
     QList <WeatherWeekStruct> weathers;
@@ -98,17 +99,25 @@ public:
     }
 
 signals:
-    void DataReady();
+    void DataReadyCurrent();
+    void DataReadyWeek();
 
 private slots:
     void onReply(QNetworkReply *reply);
 
 public slots:
+    void GetWeekWeather();
 
 private:
+
+    WeatherRequest();
+    ~WeatherRequest();
     QNetworkAccessManager *manager;
     StatusRequest status;
     static QString cityName;
+
+    static QThread* weatherRequestThread;
+    static WeatherRequest* weatherRequest;
 
     void ParsingWeekWeather(QString &data);
     void ParsingCurrentWeather(QString &data);

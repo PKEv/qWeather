@@ -78,7 +78,7 @@ private:
     inline void setupH2Layout();
     inline void setupSmallW(QFrame *parent, QVBoxLayout * layout, QLabel* laybel, QLabel* value, QLabel* dim , QLabel *line1, QLabel *line2);
 
-    WeatherRequest *request;
+    //WeatherRequest *request;
 };
 
 #endif // DAILYWIDGET_H

@@ -3,14 +3,46 @@
 // example
 // http://api.openweathermap.org/data/2.5/forecast/daily?q=Moscow&&units=metric&APPID=4a61d170b251cc18c4c9417e7663d602
 
+#include <QThread>
+
 QString WeatherRequest::cityName = "Moscow";
 
-WeatherRequest::WeatherRequest(QObject *parent) : QObject(parent)
+WeatherRequest* WeatherRequest::weatherRequest{nullptr};
+QThread* WeatherRequest::weatherRequestThread{nullptr};
+
+WeatherRequest::WeatherRequest() : QObject()
 {
     manager = new QNetworkAccessManager(0);
     status = StatusRequest::Edle;
 
     QObject::connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onReply(QNetworkReply*)));
+}
+
+WeatherRequest& WeatherRequest::getInstance()
+{
+    if (!weatherRequest)
+    {
+        weatherRequest = new WeatherRequest();
+        //loaded = false;
+    }
+    /*if (!loaded)
+        settings->ReadSettings();*/
+
+    return *weatherRequest;
+}
+
+void WeatherRequest::destroyInstance()
+{
+    delete weatherRequest;
+    weatherRequest = nullptr;
+}
+
+WeatherRequest::~WeatherRequest()
+{
+    weatherRequestThread->exit(0);
+    weatherRequestThread->wait();
+    delete weatherRequestThread;
+
 }
 
 void WeatherRequest::GetWeekWeather()
@@ -33,7 +65,7 @@ void WeatherRequest::GetCurrentWeather()
     status = StatusRequest::CurrentRequest;
 
     QString location = "q=" + cityName;// + //"&units=metric";//"&cnt=" + QString::number(dayCount);
-    QString address = "http://api.openweathermap.org/data/2.5/weather?" + location + "&APPID=4a61d170b251cc18c4c9417e7663d602";
+    QString address = "http://api.openweathermap.org/data/2.5/forecast?" + location + "&APPID=4a61d170b251cc18c4c9417e7663d602";
     manager->get(QNetworkRequest( QUrl(address) ));
 }
 
@@ -43,21 +75,22 @@ void WeatherRequest::onReply(QNetworkReply *reply)
 {
     if(reply->error() != QNetworkReply::NoError)
     {
+        status = StatusRequest::Edle;
         reply->deleteLater();
         return;
     }
     time = QDateTime::currentDateTime();
     QTextCodec *codec = QTextCodec::codecForName("utf-8");
     QString all = codec->toUnicode( reply->readAll() );
+
     if (status == StatusRequest::WeekRequest)
         ParsingWeekWeather(all);
     else if (status == StatusRequest::CurrentRequest)
         ParsingCurrentWeather(all);
 
     reply->deleteLater();
-    status = StatusRequest::Edle;
-    return;
 
+    return;
 }
 
 void WeatherRequest::ParsingWeekWeather(QString &data)
@@ -73,7 +106,7 @@ void WeatherRequest::ParsingWeekWeather(QString &data)
         QJsonObject obj = value.toObject();
         weatherStr.clouds = obj.take("clouds").toVariant().toFloat();
         weatherStr.deg = obj.take("deg").toVariant().toFloat();
-        weatherStr.dt = obj.take("dt").toVariant().toFloat();
+        weatherStr.dt.setTime_t(obj.take("dt").toVariant().toFloat());
         weatherStr.humid = obj.take("humidity").toVariant().toFloat();
         weatherStr.pressure = obj.take("pressure").toVariant().toFloat();
         weatherStr.speed = obj.take("speed").toVariant().toFloat();
@@ -91,7 +124,8 @@ void WeatherRequest::ParsingWeekWeather(QString &data)
         weatherStr.weather.main = weather.take("main").toVariant().toString();
         weathers.push_back(weatherStr);
     }
-    emit DataReady();
+    status = StatusRequest::Edle;
+    emit DataReadyWeek();
 }
 
 void WeatherRequest::ParsingCurrentWeather(QString &data)
@@ -119,7 +153,8 @@ void WeatherRequest::ParsingCurrentWeather(QString &data)
     currentWeather.weather.id = weather.take("id").toVariant().toString();
     currentWeather.weather.main = weather.take("main").toVariant().toString();
 
-    emit DataReady();
+    status = StatusRequest::Edle;
+    emit DataReadyCurrent();
 }
 
 void WeatherRequest::setCityName(const QString name)

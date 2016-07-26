@@ -24,7 +24,7 @@ public:
     ~mainpage();
      TitleWIdget *titleWidget;
      ContentWidget * contentWidget;
-     WeatherRequest *request;
+     //WeatherRequest *request;
 public slots:
 
     void Button();
