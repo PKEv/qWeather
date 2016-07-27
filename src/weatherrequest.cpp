@@ -2,7 +2,12 @@
 
 // example
 // http://api.openweathermap.org/data/2.5/forecast/daily?q=Moscow&&units=metric&APPID=4a61d170b251cc18c4c9417e7663d602
-
+//Почасовой прогноз
+//http://api.openweathermap.org/data/2.5/forecast?q=Saint%20Petersburg,RU&&units=metric&APPID=4a61d170b251cc18c4c9417e7663d602
+//Краткий прогноз
+//http://api.openweathermap.org/data/2.5/weather?q=Saint%20Petersburg,RU&&units=metric&APPID=4a61d170b251cc18c4c9417e7663d602
+//обзор на пару дней
+//http://api.openweathermap.org/data/2.5/forecast/daily?q=Saint%20Petersburg,RU&&units=metric&APPID=4a61d170b251cc18c4c9417e7663d602
 #include <QThread>
 
 QString WeatherRequest::cityName = "Moscow";

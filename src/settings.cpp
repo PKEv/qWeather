@@ -15,7 +15,7 @@ QThread* Settings::settingsThread{nullptr};
 Settings::Settings() : QObject()
 {
     settingsThread = new QThread();
-    settingsThread->setObjectName("qTox Settings");
+    settingsThread->setObjectName("Settings");
     settingsThread->start(QThread::LowPriority);
     moveToThread(settingsThread);
 
